@@ -1,6 +1,6 @@
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
-TOKEN = "8359529314:AAH1avi-nMHElgN_qlghOYhzA1DWGlMsh7w"  # BotFatherdan olingan tokenni shu yerga qo'y
+TOKEN = "YOUR_BOT_TOKEN_HERE"# BotFatherdan olingan tokenni shu yerga qo'y
 main_menu = ReplyKeyboardMarkup([
     ["Ijara shartnomasi"],
     ["Kontrakt shartnomasi"],
