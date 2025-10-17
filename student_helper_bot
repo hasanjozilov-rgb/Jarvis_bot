@@ -1,0 +1,56 @@
+from telegram import Update, ReplyKeyboardMarkup
+from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
+TOKEN = "8359529314:AAH1avi-nMHElgN_qlghOYhzA1DWGlMsh7w"  # BotFatherdan olingan tokenni shu yerga qo'y
+main_menu = ReplyKeyboardMarkup([
+    ["Ijara shartnomasi"],
+    ["Kontrakt shartnomasi"],
+    ["TTJga joylashish"]
+], resize_keyboard=True)
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        "Assalomu alaykum! Talabalar uchun yordamchi botga xush kelibsiz 👋\nQuyidagi menyudan kerakli bo‘limni tanlang:",
+        reply_markup=main_menu)
+async def stop(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("Botni to‘xtatdingiz. Yana kerak bo‘lsa /start ni bosing.")
+async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    text = update.message.text
+ if text == "Ijara shartnomasi":
+        await update.message.reply_text(
+            "🏠"📄 *Ijara shartnomasi tuzish tartibi:*\n\n"
+        "1. Soliq ilovasida ijaraga beruvchi tomonidan elektron kalit(kuluch) yaratiladi yaratilgan bo'lishi ham mumkin\n"
+        "2. Ijara shartnomasini tuzishda soliq xizmatlar foydalaning. Online tarizda tuzish ham mumkin.Online ijara shartnomasini tuzishni xohlasangiz quydagi Adminga murojat qiling. @hasanjozilov\n"
+        "3. Ijara shartnoma tuzilgandan so'ng uni https://kontrakt.edu.uz saytidan shaxsiy kabinetingizga kirib quydagi ketmaketlikni bajaring: menyu》ijara to'lovlari》ariza. ariza yuboring\n"
+        "4. Institutga quyidagi hujjatlarni olib boring:\n"
+        "   - my.gov.uz saytidan doimiy yashash joyi haqida ma’lumotnoma\n"
+        "   - kantrakt.edu.uzdan yuborgan arizangiz\n"
+        "   - Pasport nusxasi(1 dona)\n"
+        "   - Ijara shartnomasi nusxasi\n\n"
+        "📌 Hujjatlarni institutning ro‘yxatga olish bo‘limiga topshiring.")
+elif text == "Kontrakt shartnomasi":
+        await update.message.reply_text(
+            "💳 *Kontrakt shartnomasi va to‘lov:*\n\n"
+        "1. https://kontrakt.edu.uz saytiga kiring\n"
+        "2. Shaxsiy kabinetga kirib, shartnomani yuklab oling\n"
+        "3. To‘lov usullari:\n"
+        "   - PayMe, Click, Zoomrad, Upay, Oson, Anorbank. Agar online to'lov qilishni bilmasangiz quydagi link (https://youtu.be/Ubh9L6aCssA?si=_GF8fG0Ek9_zu2mf) orqali o'rganiahingiz mumkin yoki istalgan bank orqali amalga oshiring\n"
+        "4. To‘lov cheki (kvitansiya) ni yuklab oling yoki chop eting\n\n"
+        "📌 To‘lovni belgilangan muddatda amalga oshiring.")
+elif text == "TTJga joylashish":
+       await update.message.reply_text(
+           "🏢 *TTJga joylashish tartibi:*\n\n"
+        "1. Kantrakt.edu.uz saytidan shaxsiy kabinetga kiring undan menyuni tanlang talabalar turar joyi hamda ariza\n"
+        "2. shu tariqa online ariza yuboring\n"
+        "3. Hujjatlarni TTJ bo‘limiga olib boring\n\n"
+        "📌 Joylashish muddati va narxlar haqida institutdan aniqlashtiring.")
+else:
+        await update.message.reply_text("Iltimos, menyudan biror bo‘limni tanlang.")
+def main():
+    app = ApplicationBuilder().token(TOKEN).build()
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("stop", stop))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+    print("Bot ishga tushdi...")
+    app.run_polling()
+
+if __name__ == "__main__":
+    main()
